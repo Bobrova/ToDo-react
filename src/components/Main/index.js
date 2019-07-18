@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Textarea from '../Textarea';
+import './style.css'
 
 class Main extends Component {
   constructor(props) {

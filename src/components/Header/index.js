@@ -1,8 +1,9 @@
 import React from 'react';
+import './style.css'
 
 function Header() {
   return (
-      <h1>todos</h1>
+      <h1 className="headline">todos</h1>
   );
 }
 
