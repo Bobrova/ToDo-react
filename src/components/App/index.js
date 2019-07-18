@@ -1,8 +1,13 @@
 import React from 'react';
+import Header from '../Header'
+import Main from '../Main'
 
 function App() {
   return (
-    <h2>ToDo</h2>
+    <section className="todo-Page">
+      <Header />
+      <Main />
+    </section>
   );
 }
 
