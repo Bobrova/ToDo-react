@@ -1,9 +1,13 @@
 import React from 'react';
 import './style.css'
 
-function BtnSelectAll() {
+function BtnSelectAll(data) {
+  const SelectedItem = data.SelectedItem;
+  const isAllChecked = data.isAllChecked;
+  const classActive = isAllChecked ? 'active' : '';
+  // console.log(isAllChecked);
   return (
-      <div className="checked-items">{String.fromCharCode(709)}</div>
+      <div className={`checked-items ${classActive}`} onClick={SelectedItem}>{String.fromCharCode(709)}</div>
   );
 }
 
