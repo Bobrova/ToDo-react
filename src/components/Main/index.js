@@ -14,6 +14,7 @@ class Main extends Component {
       counterTask: 0,
     }
     this.getTextFromTextarea = this.getTextFromTextarea.bind(this);
+    this.handleDeleteItem = this.handleDeleteItem.bind(this);
   }
 
     getTextFromTextarea = (text) => {
@@ -25,8 +26,25 @@ class Main extends Component {
     })
   }
 
+  handleDeleteItem = (ItemID) => {
+    const todolist = this.state.todoList;
+    for (let i = 0; i < todolist.length; i++) {
+      if (todolist[i].id === ItemID) {
+        todolist.splice(i, 1);
+      }
+    }
+    const newIsOpen = todolist[0] ? this.state.isOpen : !this.state.isOpen;
+    this.setState({
+      todoList: todolist,
+      isOpen: newIsOpen
+    })
+  }
+
   render () {
-    const Tasks = this.state.isOpen && <TaskList todoList={this.state.todoList}/>
+    const Tasks = this.state.isOpen && <TaskList 
+        todoList={this.state.todoList}
+        DeleteItem={this.handleDeleteItem}
+      />
     return (
         <div className="main">
           <div className="main__header">

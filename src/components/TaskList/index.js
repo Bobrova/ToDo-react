@@ -16,7 +16,10 @@ class TaskList extends Component {
     const todoList = this.props.todoList;
     const listItem = todoList.map(item => 
       <li key={item.id} className="list-item">
-        <ItemTaskList todolist={item}/>
+        <ItemTaskList 
+          todolist={item}
+          DeleteItem={this.props.DeleteItem}
+        />
       </li>
       )
       return (

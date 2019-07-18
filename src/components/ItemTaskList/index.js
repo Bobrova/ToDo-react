@@ -15,6 +15,7 @@ class ItemTaskList extends Component {
 
 render() {
   const {todolist} = this.props
+  const {DeleteItem} = this.props
       return (
         <div className="listItemWrapper">
             {todolist.completed ? (
@@ -24,7 +25,7 @@ render() {
             )}
             <label htmlFor={todolist.id}></label>
             <Title title={todolist.title}/>
-            <BtnDelete />
+            <BtnDelete onClickDelete={DeleteItem} id={todolist.id}/>
         </div>
       )
   }
