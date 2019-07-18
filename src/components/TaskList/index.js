@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ItemTaskList from '../ItemTaskList'
+import ListFooter from '../ListFooter'
 import './style.css'
 
 class TaskList extends Component {
@@ -21,6 +22,7 @@ class TaskList extends Component {
       return (
         <ul className="main__task-list">
           {listItem}
+          <ListFooter />
         </ul>
       )
   }
