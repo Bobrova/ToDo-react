@@ -26,7 +26,9 @@ class TaskList extends Component {
       return (
         <ul className="main__task-list">
           {listItem}
-          <ListFooter />
+          <ListFooter 
+            DeleteCompletedAll={this.props.DeleteCompletedAll}
+          />
         </ul>
       )
   }

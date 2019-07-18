@@ -3,6 +3,7 @@ import './style.css'
 
 function ListFooter(data) {
 
+  const DeleteCompletedAll = data.DeleteCompletedAll;
   return (
       <li className="list-footer js-list-footer">
         <span className="footer-item item-select active-task"></span>
@@ -11,7 +12,7 @@ function ListFooter(data) {
           <span className="footer-item bookmarks js-bookmarks">Active</span>
           <span className="footer-item bookmarks js-bookmarks">Completed</span>
         </div>
-        <span className="footer-item delete-completed">Clear completed</span>
+        <span className="footer-item delete-completed" onClick={DeleteCompletedAll}>Clear completed</span>
     </li>
   );
 }

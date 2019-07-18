@@ -15,6 +15,7 @@ class Main extends Component {
     }
     this.getTextFromTextarea = this.getTextFromTextarea.bind(this);
     this.handleDeleteItem = this.handleDeleteItem.bind(this);
+    this.handleDeleteCompleted = this.handleDeleteCompleted.bind(this);
     this.handleCheckedItem = this.handleCheckedItem.bind(this);
   }
 
@@ -41,6 +42,13 @@ class Main extends Component {
     })
   }
 
+  handleDeleteCompleted = () => {
+    const {todoList} = this.state ;
+    this.setState({
+      todoList: todoList.filter(itemList => !itemList.completed)
+    })
+  }
+
   handleCheckedItem = (ItemID) => {
     const todolist = this.state.todoList;
     for (let i = 0; i < todolist.length; i++) {
@@ -58,6 +66,7 @@ class Main extends Component {
         todoList={this.state.todoList}
         DeleteItem={this.handleDeleteItem}
         CheckedItem={this.handleCheckedItem}
+        DeleteCompletedAll={this.handleDeleteCompleted}
       />
     return (
         <div className="main">
