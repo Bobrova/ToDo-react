@@ -11,6 +11,7 @@ class ItemTaskList extends Component {
     this.state = {
       isOpen: false
     }
+    this.handleClickCheckbox = this.handleClickCheckbox.bind(this);
   }
 
 render() {
@@ -19,9 +20,9 @@ render() {
       return (
         <div className="listItemWrapper">
             {todolist.completed ? (
-              <input type="checkbox" id={todolist.id} className="list-checkbox" checked />
+              <input type="checkbox" id={todolist.id} className="list-checkbox" checked onClick={this.handleClickCheckbox}/>
             ):(
-              <input type="checkbox" id={todolist.id} className="list-checkbox" />
+              <input type="checkbox" id={todolist.id} className="list-checkbox" onClick={this.handleClickCheckbox}/>
             )}
             <label htmlFor={todolist.id}></label>
             <Title title={todolist.title}/>
@@ -29,6 +30,11 @@ render() {
         </div>
       )
   }
+
+    handleClickCheckbox = () => {
+    this.props.CheckedItem(this.props.todolist.id);
+}
+
 }
 
 export default ItemTaskList;

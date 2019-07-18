@@ -15,6 +15,7 @@ class Main extends Component {
     }
     this.getTextFromTextarea = this.getTextFromTextarea.bind(this);
     this.handleDeleteItem = this.handleDeleteItem.bind(this);
+    this.handleCheckedItem = this.handleCheckedItem.bind(this);
   }
 
     getTextFromTextarea = (text) => {
@@ -40,10 +41,23 @@ class Main extends Component {
     })
   }
 
+  handleCheckedItem = (ItemID) => {
+    const todolist = this.state.todoList;
+    for (let i = 0; i < todolist.length; i++) {
+      if (todolist[i].id === ItemID) {
+        todolist[i].completed = !todolist[i].completed;
+      }
+    }
+    this.setState({
+      todoList: todolist
+    })
+  }
+
   render () {
     const Tasks = this.state.isOpen && <TaskList 
         todoList={this.state.todoList}
         DeleteItem={this.handleDeleteItem}
+        CheckedItem={this.handleCheckedItem}
       />
     return (
         <div className="main">
