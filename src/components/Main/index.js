@@ -43,9 +43,11 @@ class Main extends Component {
   }
 
   handleDeleteCompleted = () => {
-    const {todoList} = this.state ;
+    const todolist = this.state.todoList.filter(itemList => !itemList.completed);
+    const newIsOpen = todolist[0] ? this.state.isOpen : !this.state.isOpen;
     this.setState({
-      todoList: todoList.filter(itemList => !itemList.completed)
+      todoList: todolist,
+      isOpen: newIsOpen
     })
   }
 
@@ -62,11 +64,13 @@ class Main extends Component {
   }
 
   render () {
+    const countActiveItem = (this.state.todoList.filter(itemList => !itemList.completed)).length;
     const Tasks = this.state.isOpen && <TaskList 
         todoList={this.state.todoList}
         DeleteItem={this.handleDeleteItem}
         CheckedItem={this.handleCheckedItem}
         DeleteCompletedAll={this.handleDeleteCompleted}
+        countActiveItem={countActiveItem}
       />
     return (
         <div className="main">

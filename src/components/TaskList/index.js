@@ -28,6 +28,7 @@ class TaskList extends Component {
           {listItem}
           <ListFooter 
             DeleteCompletedAll={this.props.DeleteCompletedAll}
+            countActiveItem={this.props.countActiveItem}
           />
         </ul>
       )

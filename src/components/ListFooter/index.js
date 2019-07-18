@@ -4,9 +4,10 @@ import './style.css'
 function ListFooter(data) {
 
   const DeleteCompletedAll = data.DeleteCompletedAll;
+  const countActiveItem = data.countActiveItem;
   return (
       <li className="list-footer js-list-footer">
-        <span className="footer-item item-select active-task"></span>
+        <span className="footer-item item-select active-task">{countActiveItem === 1 ? `${countActiveItem} item left` : `${countActiveItem} items left`}</span>
         <div className="bookmarks-wrapper">
           <span className="footer-item bookmarks js-bookmarks activeBord">All</span>
           <span className="footer-item bookmarks js-bookmarks">Active</span>
