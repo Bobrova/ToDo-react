@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Title from '../Title'
+import BtnDelete from '../BtnDelete'
 import './style.css'
 
 class ItemTaskList extends Component {
@@ -13,11 +15,16 @@ class ItemTaskList extends Component {
 
 render() {
   const {todolist} = this.props
-  console.log('из itemlist');
-  console.log(todolist);
       return (
         <div className="listItemWrapper">
-            {todolist.title}
+            {todolist.completed ? (
+              <input type="checkbox" id={todolist.id} className="list-checkbox" checked />
+            ):(
+              <input type="checkbox" id={todolist.id} className="list-checkbox" />
+            )}
+            <label htmlFor={todolist.id}></label>
+            <Title title={todolist.title}/>
+            <BtnDelete />
         </div>
       )
   }

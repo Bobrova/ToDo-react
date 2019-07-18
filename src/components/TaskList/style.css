@@ -15,3 +15,13 @@
   box-sizing: border-box;
   font-size: 20px;
 }
+
+.list-item:hover .btnDel {
+  opacity: .4;
+}
+
+.list-item .btnDel:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
