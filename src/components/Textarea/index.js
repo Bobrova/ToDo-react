@@ -17,6 +17,7 @@ class Textarea extends Component {
     if (e.keyCode === ENTER_KEY_CODE) {
       e.preventDefault();
       if (text !== '' && /\S/.test(text)) {
+        e.target.value = '';
         this.setState({
       isOpen: true
     })
