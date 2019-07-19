@@ -24,7 +24,6 @@ class ListFooter extends Component{
   render() {
     const DeleteCompletedAll = this.props.DeleteCompletedAll
     const countActiveItem = this.props.countActiveItem
-    const acb = 'activeBord'
     const BorderAll = (this.state.tab === 'All') ? 'activeBord' : ''
     const BorderActive = (this.state.tab === 'Active') ? 'activeBord' : ''
     const BorderCompleted = (this.state.tab === 'Completed') ? 'activeBord' : ''
@@ -36,7 +35,7 @@ class ListFooter extends Component{
               <span className={`footer-item bookmarks js-bookmarks ${BorderActive}`} onClick={this.handleClickTab}>Active</span>
               <span className={`footer-item bookmarks js-bookmarks ${BorderCompleted}`} onClick={this.handleClickTab}>Completed</span>
             </div>
-            <span className="footer-item delete-completed" onClick={DeleteCompletedAll}>Clear completed</span>
+            {this.props.isCheckedExists && <span className="footer-item delete-completed" onClick={DeleteCompletedAll}>Clear completed</span>}
         </li>
       )
   }

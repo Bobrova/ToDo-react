@@ -30,6 +30,8 @@ class TaskList extends Component {
         return this.props.todoList.filter(itemList => !itemList.completed)
       case 'Completed':  
         return this.props.todoList.filter(itemList => itemList.completed)
+      default: 
+        break
     }
   }
 
@@ -54,6 +56,7 @@ class TaskList extends Component {
             DeleteCompletedAll={this.props.DeleteCompletedAll}
             countActiveItem={this.props.countActiveItem}
             GetItemsTab={this.handleGetItemsTab}
+            isCheckedExists={this.props.isCheckedExists}
           />
         </ul>
       )
