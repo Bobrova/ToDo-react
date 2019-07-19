@@ -9,10 +9,9 @@ class Main extends Component {
     super(props)
 
     this.state = {
-      isOpen: false,
-      todoList: [],
-      counterTask: 0,
-      checkStorage: true
+      isOpen: (JSON.parse(localStorage.getItem('todoApp')).length > 0) || false,
+      todoList: JSON.parse(localStorage.getItem('todoApp')) || [],
+      counterTask: (JSON.parse(localStorage.getItem('todoApp')).length > 0) ? JSON.parse(localStorage.getItem('todoApp'))[JSON.parse(localStorage.getItem('todoApp')).length - 1].id : 0,
     }
 
     this.getTextFromTextarea = this.getTextFromTextarea.bind(this);
@@ -30,9 +29,12 @@ class Main extends Component {
       todoList: todolist,
       isOpen: true
     })
+    this.saveToStorage(todolist);
   }
 
-
+  saveToStorage = (todolist) => {
+    localStorage.setItem('todoApp', JSON.stringify(todolist));
+  }
 
   handleDeleteItem = (ItemID) => {
     const todolist = this.state.todoList;
@@ -47,6 +49,7 @@ class Main extends Component {
       isOpen: newIsOpen,
       isAllChecked: (todolist.length === 0) ? false : this.state.isAllChecked
     })
+    this.saveToStorage(todolist);
   }
 
   handleDeleteCompleted = () => {
@@ -57,6 +60,7 @@ class Main extends Component {
       isOpen: newIsOpen,
       isAllChecked: false,
     })
+    this.saveToStorage(todolist);
   }
 
   handleCheckedItem = (ItemID) => {
@@ -73,6 +77,7 @@ class Main extends Component {
       todoList: todolist,
       isAllChecked: isAllChecked
     })
+    this.saveToStorage(todolist);
   }
 
   handleSelectedItem = () => {
@@ -100,6 +105,7 @@ class Main extends Component {
       todoList: todolist,
       isAllChecked: isAllChecked
     })
+    this.saveToStorage(todolist);
   }
 
   handleEditItem = (todolistEdit) => {
@@ -112,10 +118,14 @@ class Main extends Component {
     this.setState({
       todoList: todolist,
     })
-
+    this.saveToStorage(todolist);
   }
 
   render () {
+    console.log('main')
+    console.log(this.state.counterTask)
+    console.log(this.state.isOpen)
+
     const countActiveItem = (this.state.todoList.filter(itemList => !itemList.completed)).length;
     const Tasks = this.state.isOpen && <TaskList 
         todoList={this.state.todoList}
