@@ -12,7 +12,7 @@ class Main extends Component {
       isOpen: false,
       todoList: [],
       counterTask: 0,
-      isAllChecked: false
+      checkStorage: true
     }
 
     this.getTextFromTextarea = this.getTextFromTextarea.bind(this);
@@ -24,12 +24,15 @@ class Main extends Component {
 
     getTextFromTextarea = (text) => {
     const task = {id: this.state.counterTask + 1, title: text, completed: false};
+    const todolist = this.state.todoList.concat(task);
     this.setState({
       counterTask: this.state.counterTask + 1,
-      todoList: this.state.todoList.concat(task),
+      todoList: todolist,
       isOpen: true
     })
   }
+
+
 
   handleDeleteItem = (ItemID) => {
     const todolist = this.state.todoList;
