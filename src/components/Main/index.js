@@ -111,7 +111,8 @@ class Main extends Component {
     this.saveToStorage(todolist);
   }
 
-  handleEditItem = (todolistEdit) => {
+  handleEditItem = (todolistEdit, isEmpty) => {
+    if (isEmpty) return this.handleDeleteItem(todolistEdit.id)
     const todolist = this.state.todoList;
     for (let i = 0; i < todolist.length; i++) {
       if (todolist[i].id === todolistEdit.id) {

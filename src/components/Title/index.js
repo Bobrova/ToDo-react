@@ -16,7 +16,7 @@ class Title extends Component {
   render() {
     const todolist = this.props.todolist;
     return (
-        <span className="task-list_text" onDoubleClick={this.handleClick}>{todolist.title.trim()}</span>
+        <span className="task-list_text" onDoubleClick={this.handleClick}>{todolist.title}</span>
     )
   }
   

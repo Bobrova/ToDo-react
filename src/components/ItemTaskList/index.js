@@ -31,7 +31,7 @@ handleClickCheckbox = () => {
 
 handleKeyPress = (e) => {
     const ENTER_KEY_CODE = 13;
-    const text = e.target.value;
+    const text = e.target.value.trim();
     if (e.keyCode === ENTER_KEY_CODE) {
       e.preventDefault();
       if (text !== '' && /\S/.test(text)) {
@@ -46,15 +46,14 @@ handleKeyPress = (e) => {
   }
 
 handleInputBlur = (e) => {
-    const text = e.target.value;
-      if (text !== '' && /\S/.test(text)) {
-        e.target.value = '';
-        const task = {id: this.props.todolist.id, title: text, completed: this.props.todolist.completed};
-        this.props.EditItem(task);
-        this.setState({
-          IdEdit: 0,
-        })
-      } 
+    const text = e.target.value.trim();
+    if (text ==='') return this.props.EditItem(this.props.todolist, true);
+      e.target.value = '';
+      const task = {id: this.props.todolist.id, title: text, completed: this.props.todolist.completed};
+      this.props.EditItem(task);
+      this.setState({
+        IdEdit: 0,
+      })
     }
 
 handleInputChange = (e) => {

@@ -15,7 +15,7 @@ class ListFooter extends Component{
 
   handleClickTab = (e) => {
     const tab = e.target.innerHTML;
-    this.props.GetItemsTab(tab);
+    this.props.getItemsTab(tab);
     this.setState({
       tab: tab
     })
