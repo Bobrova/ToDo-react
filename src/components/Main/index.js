@@ -52,7 +52,7 @@ class Main extends Component {
     this.setState({
       todoList: todolist,
       isOpen: newIsOpen,
-      isAllChecked: false
+      isAllChecked: false,
     })
   }
 
@@ -99,15 +99,28 @@ class Main extends Component {
     })
   }
 
+  handleEditItem = (todolistEdit) => {
+    const todolist = this.state.todoList;
+    for (let i = 0; i < todolist.length; i++) {
+      if (todolist[i].id === todolistEdit.id) {
+        todolist[i].title = todolistEdit.title;
+      }
+    }
+    this.setState({
+      todoList: todolist,
+    })
+
+  }
+
   render () {
     const countActiveItem = (this.state.todoList.filter(itemList => !itemList.completed)).length;
-    // console.log(this.state.isAllChecked);
     const Tasks = this.state.isOpen && <TaskList 
         todoList={this.state.todoList}
         DeleteItem={this.handleDeleteItem}
         CheckedItem={this.handleCheckedItem}
         DeleteCompletedAll={this.handleDeleteCompleted}
         countActiveItem={countActiveItem}
+        EditItem={this.handleEditItem}
       />
     return (
         <div className="main">

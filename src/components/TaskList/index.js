@@ -20,6 +20,8 @@ class TaskList extends Component {
           todolist={item}
           DeleteItem={this.props.DeleteItem}
           CheckedItem={this.props.CheckedItem}
+          EditItem={this.props.EditItem}
+          IdEdit={this.props.IdEdit}
         />
       </li>
       )

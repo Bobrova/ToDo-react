@@ -9,32 +9,60 @@ class ItemTaskList extends Component {
     super(props)
 
     this.state = {
-      isOpen: false
+      IdEdit: 0,
+      ValueBeforeEdit: ''
     }
-    this.handleClickCheckbox = this.handleClickCheckbox.bind(this);
+
+    this.handleClickCheckbox = this.handleClickCheckbox.bind(this)
+    this.handleEditItem = this.handleEditItem.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
+  }
+
+  handleEditItem = (todolist) => {
+    this.setState({
+      IdEdit: todolist.id,
+      ValueBeforeEdit: todolist.title
+    })
+  }
+
+handleClickCheckbox = () => {
+  this.props.CheckedItem(this.props.todolist.id)
+}
+
+handleKeyPress = (e) => {
+    const ENTER_KEY_CODE = 13;
+    const text = e.target.value;
+    if (e.keyCode === ENTER_KEY_CODE) {
+      e.preventDefault();
+      if (text !== '' && /\S/.test(text)) {
+        e.target.value = '';
+        const task = {id: this.props.todolist.id, title: text, completed: this.props.todolist.completed};
+        this.props.EditItem(task);
+        this.setState({
+          IdEdit: 0,
+        })
+      }
+      
+    }
   }
 
 render() {
   const {todolist} = this.props
   const {DeleteItem} = this.props
+  const checkedIt = todolist.completed;
+  const check = !checkedIt ? <input type="checkbox" id={todolist.id} className="list-checkbox" onClick={this.handleClickCheckbox}/> : <input type="checkbox" id={todolist.id} checked className="list-checkbox" onClick={this.handleClickCheckbox}/>
+  const isEdit = (todolist.id === this.state.IdEdit);
+
       return (
         <div className="listItemWrapper">
-            {todolist.completed ? (
-              <input type="checkbox" id={todolist.id} className="list-checkbox" checked onClick={this.handleClickCheckbox}/>
-            ):(
-              <input type="checkbox" id={todolist.id} className="list-checkbox" onClick={this.handleClickCheckbox}/>
-            )}
-            <label htmlFor={todolist.id}></label>
-            <Title title={todolist.title}/>
-            <BtnDelete onClickDelete={DeleteItem} id={todolist.id}/>
-        </div>
+          {!isEdit && check}
+          {!isEdit && <label htmlFor={todolist.id}></label>}
+          {!isEdit && <Title todolist={todolist} EditItem={this.handleEditItem}/>}
+          {!isEdit && <BtnDelete onClickDelete={DeleteItem} id={todolist.id}/>}
+          {isEdit && <input type="text" className="text-editing" onKeyDown={this.handleKeyPress}/>}
+        </div>   
       )
   }
-
-    handleClickCheckbox = () => {
-    this.props.CheckedItem(this.props.todolist.id);
-}
-
 }
 
 export default ItemTaskList;
