@@ -34,6 +34,9 @@ class Main extends Component {
 
   saveToStorage = (todolist) => {
     localStorage.setItem('todoApp', JSON.stringify(todolist));
+    if (todolist.length === 0) {
+      localStorage.removeItem("todoApp");
+    }
   }
 
   handleDeleteItem = (ItemID) => {
