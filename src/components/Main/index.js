@@ -9,9 +9,9 @@ class Main extends Component {
     super(props)
 
     this.state = {
-      isOpen: (JSON.parse(localStorage.getItem('todoApp')).length > 0) || false,
+      isOpen: (localStorage.getItem('todoApp') !== null) || false,
       todoList: JSON.parse(localStorage.getItem('todoApp')) || [],
-      counterTask: (JSON.parse(localStorage.getItem('todoApp')).length > 0) ? JSON.parse(localStorage.getItem('todoApp'))[JSON.parse(localStorage.getItem('todoApp')).length - 1].id : 0,
+      counterTask: (localStorage.getItem('todoApp') !== null) ? JSON.parse(localStorage.getItem('todoApp'))[JSON.parse(localStorage.getItem('todoApp')).length - 1].id : 0,
     }
 
     this.getTextFromTextarea = this.getTextFromTextarea.bind(this);
