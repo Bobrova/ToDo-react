@@ -52,8 +52,8 @@ handleInputChange = (e) => {
 render() {
   const {todolist} = this.props
   const {DeleteItem} = this.props
-  const checkedIt = todolist.completed;
-  const check = !checkedIt ? <input type="checkbox" id={todolist.id} className="list-checkbox" onClick={this.handleClickCheckbox}/> : <input type="checkbox" id={todolist.id} checked className="list-checkbox" onClick={this.handleClickCheckbox}/>
+  const completed = todolist.completed;
+  const check = <input type="checkbox" id={todolist.id} checked={completed} className="list-checkbox" onChange={this.handleClickCheckbox}/>
   const isEdit = (todolist.id === this.state.IdEdit);
 
       return (
