@@ -122,10 +122,6 @@ class Main extends Component {
   }
 
   render () {
-    console.log('main')
-    console.log(this.state.counterTask)
-    console.log(this.state.isOpen)
-
     const countActiveItem = (this.state.todoList.filter(itemList => !itemList.completed)).length;
     const Tasks = this.state.isOpen && <TaskList 
         todoList={this.state.todoList}

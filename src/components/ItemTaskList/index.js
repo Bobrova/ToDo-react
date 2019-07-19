@@ -41,10 +41,13 @@ handleKeyPress = (e) => {
         this.setState({
           IdEdit: 0,
         })
-      }
-      
+      } 
     }
   }
+
+handleInputChange = (e) => {
+   this.setState({ValueBeforeEdit: e.target.value});
+}
 
 render() {
   const {todolist} = this.props
@@ -59,7 +62,7 @@ render() {
           {!isEdit && <label htmlFor={todolist.id}></label>}
           {!isEdit && <Title todolist={todolist} EditItem={this.handleEditItem}/>}
           {!isEdit && <BtnDelete onClickDelete={DeleteItem} id={todolist.id}/>}
-          {isEdit && <input type="text" className="text-editing" onKeyDown={this.handleKeyPress}/>}
+          {isEdit && <input type="text" className="text-editing" value={this.state.ValueBeforeEdit} onChange={this.handleInputChange} onKeyDown={this.handleKeyPress}/>}
         </div>   
       )
   }
