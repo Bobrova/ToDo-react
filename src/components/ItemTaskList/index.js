@@ -45,6 +45,18 @@ handleKeyPress = (e) => {
     }
   }
 
+handleInputBlur = (e) => {
+    const text = e.target.value;
+      if (text !== '' && /\S/.test(text)) {
+        e.target.value = '';
+        const task = {id: this.props.todolist.id, title: text, completed: this.props.todolist.completed};
+        this.props.EditItem(task);
+        this.setState({
+          IdEdit: 0,
+        })
+      } 
+    }
+
 handleInputChange = (e) => {
    this.setState({ValueBeforeEdit: e.target.value});
 }
@@ -62,7 +74,7 @@ render() {
           {!isEdit && <label htmlFor={todolist.id}></label>}
           {!isEdit && <Title todolist={todolist} EditItem={this.handleEditItem}/>}
           {!isEdit && <BtnDelete onClickDelete={DeleteItem} id={todolist.id}/>}
-          {isEdit && <input type="text" className="text-editing" value={this.state.ValueBeforeEdit} onChange={this.handleInputChange} onKeyDown={this.handleKeyPress}/>}
+          {isEdit && <input type="text" autoFocus className="text-editing" value={this.state.ValueBeforeEdit} onChange={this.handleInputChange} onKeyDown={this.handleKeyPress} onBlur={this.handleInputBlur}/>}
         </div>   
       )
   }
