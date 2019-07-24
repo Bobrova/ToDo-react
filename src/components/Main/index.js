@@ -75,11 +75,9 @@ class Main extends Component {
       }
       if (todolist[i].completed) counterChecked += 1;
     }
-    const isAllChecked = counterChecked === todolist.length;
     const isCheckedExists = counterChecked !== 0
     this.setState({
       todoList: todolist,
-      isAllChecked: isAllChecked,
       isCheckedExists: isCheckedExists
     })
     this.saveToStorage(todolist);
@@ -102,15 +100,12 @@ class Main extends Component {
       }
       isAllChecked = false;
     }
-    else {
-      isAllChecked = true;
-    }
 
     this.setState({
       todoList: todolist,
-      isAllChecked: isAllChecked,
       isCheckedExists: isAllChecked
     })
+    
     this.saveToStorage(todolist);
   }
 
@@ -130,6 +125,7 @@ class Main extends Component {
 
   render () {
     const countActiveItem = (this.state.todoList.filter(itemList => !itemList.completed)).length;
+    const countCompletedItems = (this.state.todoList.filter(itemList => itemList.completed)).length;
     const Tasks = this.state.isOpen && <TaskList 
         todoList={this.state.todoList}
         DeleteItem={this.handleDeleteItem}
@@ -137,12 +133,13 @@ class Main extends Component {
         DeleteCompletedAll={this.handleDeleteCompleted}
         countActiveItem={countActiveItem}
         EditItem={this.handleEditItem}
-        isCheckedExists={this.state.isCheckedExists || countActiveItem === 0}
+        isCheckedExists={countCompletedItems !== 0}
       />
+
     return (
         <div className="main">
           <div className="main__header">
-            {this.state.isOpen && <BtnSelectAll SelectedItem={this.handleSelectedItem} isAllChecked={this.state.isAllChecked || countActiveItem === 0}/>}
+            {this.state.isOpen && <BtnSelectAll SelectedItem={this.handleSelectedItem} isAllChecked={countActiveItem === 0}/>}
             <Textarea 
               getText = {this.getTextFromTextarea}
             />
