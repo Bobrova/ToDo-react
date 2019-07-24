@@ -2,11 +2,6 @@ import React, {Component} from 'react';
 import './style.css'
 
 class Textarea extends Component {
-  constructor(props) {
-    super(props)
-
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
   
   handleKeyPress = (e) => {
     const {getText} = this.props;

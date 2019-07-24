@@ -3,12 +3,6 @@ import './style.css'
 
 class Title extends Component {
 
-  constructor(props) {
-    super(props)
-
-    this.handleClick = this.handleClick.bind(this)
-  }
-
   handleClick = () => {
     this.props.editItem(this.props.todolist);
   }

@@ -3,14 +3,8 @@ import './style.css'
 
 class ListFooter extends Component{
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      tab: 'All'
-    }
-
-    this.handleClickTab = this.handleClickTab.bind(this);
+  state = {
+    tab: 'All'
   }
 
   handleClickTab = (e) => {

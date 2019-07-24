@@ -4,12 +4,9 @@ import ListFooter from '../ListFooter'
 import './style.css'
 
 class TaskList extends Component {
-  constructor(props) {
-    super(props)
 
-    this.state = {
-      tab: 'All'
-    }
+  state = {
+    tab: 'All'
   }
 
   handleGetItemsTab = (tab) => {
@@ -30,7 +27,7 @@ class TaskList extends Component {
       countActiveItem,
       deleteCompletedAll
     } = this.props
-    
+
     this.getItemsTab = () => {
     switch (tab) {
       case 'All':  

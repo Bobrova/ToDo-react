@@ -1,0 +1,14 @@
+{
+    "extends": ["airbnb"],
+    "plugins": [
+        "import",
+        "react",
+        "jsx-a11y"
+    ],
+    "env": {
+      "browser": true
+    },
+    "parserOptions": {
+    "ecmaVersion": 6
+    }
+}

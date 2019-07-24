@@ -13,12 +13,6 @@ class Main extends Component {
       todoList: JSON.parse(localStorage.getItem('todoApp')) || [],
       counterTask: (localStorage.getItem('todoApp') !== null) ? JSON.parse(localStorage.getItem('todoApp'))[JSON.parse(localStorage.getItem('todoApp')).length - 1].id : 0,
     }
-
-    this.getTextFromTextarea = this.getTextFromTextarea.bind(this);
-    this.handleItemDelete = this.handleItemDelete.bind(this);
-    this.handleDeleteCompleted = this.handleDeleteCompleted.bind(this);
-    this.handleCheckedItem = this.handleCheckedItem.bind(this);
-    this.handleSelectedItem = this.handleSelectedItem.bind(this);
   }
 
   getTextFromTextarea = (text) => {
