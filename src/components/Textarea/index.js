@@ -9,13 +9,14 @@ class Textarea extends Component {
   }
   
   handleKeyPress = (e) => {
+    const {getText} = this.props;
     const ENTER_KEY_CODE = 13;
     const text = e.target.value;
     if (e.keyCode === ENTER_KEY_CODE) {
       e.preventDefault();
       if (text !== '' && /\S/.test(text)) {
         e.target.value = '';
-        this.props.getText(text);
+        getText(text);
       }
       
     }

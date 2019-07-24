@@ -30,32 +30,34 @@ handleClickCheckbox = () => {
 }
 
 handleKeyPress = (e) => {
-    const ENTER_KEY_CODE = 13;
-    if (e.keyCode === ENTER_KEY_CODE) {
-      e.preventDefault();
-      const text = e.target.value.trim();
-      if (text ==='') return this.props.editItem(this.props.todolist, true);
-      if (text !== '' && /\S/.test(text)) {
-        e.target.value = '';
-        const task = {id: this.props.todolist.id, title: text, completed: this.props.todolist.completed};
-        this.props.editItem(task);
-        this.setState({
-          IdEdit: 0,
-        })
-      } 
-    }
+  const {todolist, editItem} = this.props;
+  const ENTER_KEY_CODE = 13;
+  if (e.keyCode === ENTER_KEY_CODE) {
+    e.preventDefault();
+    const text = e.target.value.trim();
+    if (text ==='') return editItem(todolist, true);
+    if (text !== '' && /\S/.test(text)) {
+      e.target.value = '';
+      const task = {id: todolist.id, title: text, completed: todolist.completed};
+      editItem(task);
+      this.setState({
+        idEdit: 0,
+      })
+    } 
   }
+}
 
 handleInputBlur = (e) => {
-    const text = e.target.value.trim();
-    if (text ==='') return this.props.editItem(this.props.todolist, true);
-      e.target.value = '';
-      const task = {id: this.props.todolist.id, title: text, completed: this.props.todolist.completed};
-      this.props.editItem(task);
-      this.setState({
-        IdEdit: 0,
-      })
-    }
+  const {todolist, editItem} = this.props;
+  const text = e.target.value.trim();
+  if (text ==='') return editItem(todolist, true);
+  e.target.value = '';
+  const task = {id: todolist.id, title: text, completed: todolist.completed};
+  editItem(task);
+  this.setState({
+    idEdit: 0,
+  })
+}
 
 handleInputChange = (e) => {
    this.setState({valueBeforeEdit: e.target.value});

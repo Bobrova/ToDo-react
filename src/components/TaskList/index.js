@@ -20,7 +20,17 @@ class TaskList extends Component {
 
   render() {
     const {tab} = this.state
-    const {todoList} = this.props
+    const {
+      todoList,
+      idEdit,
+      deleteItem,
+      checkedItem,
+      editItem,
+      isCheckedExists,
+      countActiveItem,
+      deleteCompletedAll
+    } = this.props
+    
     this.getItemsTab = () => {
     switch (tab) {
       case 'All':  
@@ -39,28 +49,26 @@ class TaskList extends Component {
       <li key={item.id} className="list-item">
         <ItemTaskList 
           todolist={item}
-          idEdit={this.props.idEdit}
-          deleteItem={this.props.deleteItem}
-          checkedItem={this.props.checkedItem}
-          editItem={this.props.editItem}
+          idEdit={idEdit}
+          deleteItem={deleteItem}
+          checkedItem={checkedItem}
+          editItem={editItem}
         />
       </li>
       )
-      
 
       return (
         <ul className="main__task-list">
           {listItem}
           <ListFooter 
-            isCheckedExists={this.props.isCheckedExists}
-            countActiveItem={this.props.countActiveItem}
-            deleteCompletedAll={this.props.deleteCompletedAll}
+            isCheckedExists={isCheckedExists}
+            countActiveItem={countActiveItem}
+            deleteCompletedAll={deleteCompletedAll}
             getTab={this.handleGetItemsTab}
           />
         </ul>
       )
   }
 }
-
 
 export default TaskList;
