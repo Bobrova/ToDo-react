@@ -14,7 +14,7 @@ class Title extends Component {
   }
 
   render() {
-    const todolist = this.props.todolist;
+    const {todolist} = this.props;
     return (
         <span className="task-list_text" onDoubleClick={this.handleClick}>{todolist.title}</span>
     )

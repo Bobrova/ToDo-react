@@ -21,11 +21,12 @@ class Main extends Component {
     this.handleSelectedItem = this.handleSelectedItem.bind(this);
   }
 
-    getTextFromTextarea = (text) => {
-    const task = {id: this.state.counterTask + 1, title: text, completed: false};
-    const todolist = this.state.todoList.concat(task);
+  getTextFromTextarea = (text) => {
+  const {todoList, counterTask} = this.state
+    const task = {id: counterTask + 1, title: text, completed: false};
+    const todolist = todoList.concat(task);
     this.setState({
-      counterTask: this.state.counterTask + 1,
+      counterTask: counterTask + 1,
       todoList: todolist,
       isOpen: true
     })
@@ -40,24 +41,24 @@ class Main extends Component {
   }
 
   handleDeleteItem = (ItemID) => {
-    const todolist = this.state.todoList;
-    for (let i = 0; i < todolist.length; i++) {
-      if (todolist[i].id === ItemID) {
-        todolist.splice(i, 1);
+    const {todoList, isOpen} = this.state;
+    for (let i = 0; i < todoList.length; i++) {
+      if (todoList[i].id === ItemID) {
+        todoList.splice(i, 1);
       }
     }
-    const newIsOpen = todolist[0] ? this.state.isOpen : !this.state.isOpen;
+    const newIsOpen = todoList[0] ? isOpen : !isOpen;
     this.setState({
-      todoList: todolist,
+      todoList: todoList,
       isOpen: newIsOpen,
-      isAllChecked: (todolist.length === 0) ? false : this.state.isAllChecked
     })
-    this.saveToStorage(todolist);
+    this.saveToStorage(todoList);
   }
 
   handleDeleteCompleted = () => {
-    const todolist = this.state.todoList.filter(itemList => !itemList.completed);
-    const newIsOpen = todolist[0] ? this.state.isOpen : !this.state.isOpen;
+    const {todoList, isOpen} = this.state;
+    const todolist = todoList.filter(itemList => !itemList.completed);
+    const newIsOpen = todolist[0] ? isOpen : !isOpen;
     this.setState({
       todoList: todolist,
       isOpen: newIsOpen,
@@ -67,67 +68,68 @@ class Main extends Component {
   }
 
   handleCheckedItem = (ItemID) => {
-    const todolist = this.state.todoList;
+    const {todoList} = this.state;
     let counterChecked = 0;
-    for (let i = 0; i < todolist.length; i++) {
-      if (todolist[i].id === ItemID) {
-        todolist[i].completed = !todolist[i].completed;
+    for (let i = 0; i < todoList.length; i++) {
+      if (todoList[i].id === ItemID) {
+        todoList[i].completed = !todoList[i].completed;
       }
-      if (todolist[i].completed) counterChecked += 1;
+      if (todoList[i].completed) counterChecked += 1;
     }
-    const isCheckedExists = counterChecked !== 0
+    const isCheckedExists = counterChecked !== 0;
     this.setState({
-      todoList: todolist,
+      todoList: todoList,
       isCheckedExists: isCheckedExists
     })
-    this.saveToStorage(todolist);
+    this.saveToStorage(todoList);
   }
 
   handleSelectedItem = () => {
-    const todolist = this.state.todoList;
+    const {todoList} = this.state;
     let isAllChecked = true;
 
-    for (let i = 0; i < todolist.length; i++) {
-      if (!todolist[i].completed) {
-        todolist[i].completed = true;
+    for (let i = 0; i < todoList.length; i++) {
+      if (!todoList[i].completed) {
+        todoList[i].completed = true;
         isAllChecked = false;
       }
     }
 
     if (isAllChecked) {
-      for (let i = 0; i < todolist.length; i++) {
-        todolist[i].completed = false;
+      for (let i = 0; i < todoList.length; i++) {
+        todoList[i].completed = false;
       }
       isAllChecked = false;
     }
 
     this.setState({
-      todoList: todolist,
+      todoList: todoList,
       isCheckedExists: isAllChecked
     })
-    
-    this.saveToStorage(todolist);
+
+    this.saveToStorage(todoList);
   }
 
   handleEditItem = (todolistEdit, isEmpty) => {
+    const {todoList} = this.state;
     if (isEmpty) return this.handleDeleteItem(todolistEdit.id)
-    const todolist = this.state.todoList;
-    for (let i = 0; i < todolist.length; i++) {
-      if (todolist[i].id === todolistEdit.id) {
-        todolist[i].title = todolistEdit.title;
+    for (let i = 0; i < todoList.length; i++) {
+      if (todoList[i].id === todolistEdit.id) {
+        todoList[i].title = todolistEdit.title;
       }
     }
     this.setState({
-      todoList: todolist,
+      todoList: todoList,
     })
-    this.saveToStorage(todolist);
+    this.saveToStorage(todoList);
   }
 
   render () {
+    const {todoList, isOpen} = this.state;
     const countActiveItem = (this.state.todoList.filter(itemList => !itemList.completed)).length;
     const countCompletedItems = (this.state.todoList.filter(itemList => itemList.completed)).length;
-    const Tasks = this.state.isOpen && <TaskList 
-        todoList={this.state.todoList}
+    const Tasks = isOpen && <TaskList 
+        todoList={todoList}
         DeleteItem={this.handleDeleteItem}
         CheckedItem={this.handleCheckedItem}
         DeleteCompletedAll={this.handleDeleteCompleted}

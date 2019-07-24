@@ -62,11 +62,11 @@ handleInputChange = (e) => {
 }
 
 render() {
-  const {todolist} = this.props
-  const {DeleteItem} = this.props
+  const {IdEdit, ValueBeforeEdit} = this.state;
+  const {todolist, DeleteItem} = this.props;
   const completed = todolist.completed;
   const check = <input type="checkbox" id={todolist.id} checked={completed} className="list-checkbox" onChange={this.handleClickCheckbox}/>
-  const isEdit = (todolist.id === this.state.IdEdit);
+  const isEdit = (todolist.id === IdEdit);
 
       return (
         <div className="listItemWrapper">
@@ -74,7 +74,7 @@ render() {
           {!isEdit && <label htmlFor={todolist.id}></label>}
           {!isEdit && <Title todolist={todolist} EditItem={this.handleEditItem}/>}
           {!isEdit && <BtnDelete onClickDelete={DeleteItem} id={todolist.id}/>}
-          {isEdit && <input type="text" autoFocus className="text-editing" value={this.state.ValueBeforeEdit} onChange={this.handleInputChange} onKeyDown={this.handleKeyPress} onBlur={this.handleInputBlur}/>}
+          {isEdit && <input type="text" autoFocus className="text-editing" value={ValueBeforeEdit} onChange={this.handleInputChange} onKeyDown={this.handleKeyPress} onBlur={this.handleInputBlur}/>}
         </div>   
       )
   }

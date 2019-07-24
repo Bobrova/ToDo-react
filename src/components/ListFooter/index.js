@@ -22,18 +22,18 @@ class ListFooter extends Component{
   }
 
   render() {
-    const DeleteCompletedAll = this.props.DeleteCompletedAll
-    const countActiveItem = this.props.countActiveItem
-    const BorderAll = (this.state.tab === 'All') ? 'activeBord' : ''
-    const BorderActive = (this.state.tab === 'Active') ? 'activeBord' : ''
-    const BorderCompleted = (this.state.tab === 'Completed') ? 'activeBord' : ''
+    const {tab} = this.state;
+    const {DeleteCompletedAll, countActiveItem} = this.props;
+    const BorderAll = (tab === 'All') ? 'activeBord' : ''
+    const BorderActive = (tab === 'Active') ? 'activeBord' : ''
+    const BorderCompleted = (tab === 'Completed') ? 'activeBord' : ''
     return (
           <li className="list-footer js-list-footer">
             <span className="footer-item item-select active-task">{countActiveItem === 1 ? `${countActiveItem} item left` : `${countActiveItem} items left`}</span>
             <div className="bookmarks-wrapper">
-              <span className={`footer-item bookmarks js-bookmarks ${BorderAll}`} onClick={this.handleClickTab}>All</span>
-              <span className={`footer-item bookmarks js-bookmarks ${BorderActive}`} onClick={this.handleClickTab}>Active</span>
-              <span className={`footer-item bookmarks js-bookmarks ${BorderCompleted}`} onClick={this.handleClickTab}>Completed</span>
+              <span className={`footer-item bookmarks ${BorderAll}`} onClick={this.handleClickTab}>All</span>
+              <span className={`footer-item bookmarks ${BorderActive}`} onClick={this.handleClickTab}>Active</span>
+              <span className={`footer-item bookmarks ${BorderCompleted}`} onClick={this.handleClickTab}>Completed</span>
             </div>
             {this.props.isCheckedExists && <span className="footer-item delete-completed" onClick={DeleteCompletedAll}>Clear completed</span>}
         </li>

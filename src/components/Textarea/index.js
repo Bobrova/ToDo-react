@@ -4,9 +4,6 @@ import './style.css'
 class Textarea extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      isOpen: false,
-    }
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
@@ -18,10 +15,7 @@ class Textarea extends Component {
       e.preventDefault();
       if (text !== '' && /\S/.test(text)) {
         e.target.value = '';
-        this.setState({
-      isOpen: true
-    })
-      this.props.getText(text);
+        this.props.getText(text);
       }
       
     }

@@ -9,7 +9,6 @@ class TaskList extends Component {
 
     this.state = {
       isOpen: false,
-      todoList: this.props.todoList,
       tab: 'All'
     }
   }
@@ -21,22 +20,23 @@ class TaskList extends Component {
   }
 
   render() {
-
+    const {tab} = this.state
+    const {todoList} = this.props
     this.getItemsTab = () => {
-    switch (this.state.tab) {
+    switch (tab) {
       case 'All':  
-        return this.props.todoList
+        return todoList
       case 'Active':  
-        return this.props.todoList.filter(itemList => !itemList.completed)
+        return todoList.filter(itemList => !itemList.completed)
       case 'Completed':  
-        return this.props.todoList.filter(itemList => itemList.completed)
+        return todoList.filter(itemList => itemList.completed)
       default: 
         break
     }
   }
 
-    const todoList = this.getItemsTab()
-    const listItem = todoList.map(item => 
+    const todoListTab = this.getItemsTab()
+    const listItem = todoListTab.map(item => 
       <li key={item.id} className="list-item">
         <ItemTaskList 
           todolist={item}
