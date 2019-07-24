@@ -10,7 +10,7 @@ class Title extends Component {
   }
 
   handleClick = () => {
-    this.props.EditItem(this.props.todolist);
+    this.props.editItem(this.props.todolist);
   }
 
   render() {

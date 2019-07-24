@@ -9,8 +9,8 @@ class ItemTaskList extends Component {
     super(props)
 
     this.state = {
-      IdEdit: 0,
-      ValueBeforeEdit: ''
+      idEdit: 0,
+      valueBeforeEdit: ''
     }
 
     this.handleClickCheckbox = this.handleClickCheckbox.bind(this)
@@ -20,13 +20,13 @@ class ItemTaskList extends Component {
 
   handleEditItem = (todolist) => {
     this.setState({
-      IdEdit: todolist.id,
-      ValueBeforeEdit: todolist.title
+      idEdit: todolist.id,
+      valueBeforeEdit: todolist.title
     })
   }
 
 handleClickCheckbox = () => {
-  this.props.CheckedItem(this.props.todolist.id)
+  this.props.checkedItem(this.props.todolist.id)
 }
 
 handleKeyPress = (e) => {
@@ -34,11 +34,11 @@ handleKeyPress = (e) => {
     if (e.keyCode === ENTER_KEY_CODE) {
       e.preventDefault();
       const text = e.target.value.trim();
-      if (text ==='') return this.props.EditItem(this.props.todolist, true);
+      if (text ==='') return this.props.editItem(this.props.todolist, true);
       if (text !== '' && /\S/.test(text)) {
         e.target.value = '';
         const task = {id: this.props.todolist.id, title: text, completed: this.props.todolist.completed};
-        this.props.EditItem(task);
+        this.props.editItem(task);
         this.setState({
           IdEdit: 0,
         })
@@ -48,33 +48,33 @@ handleKeyPress = (e) => {
 
 handleInputBlur = (e) => {
     const text = e.target.value.trim();
-    if (text ==='') return this.props.EditItem(this.props.todolist, true);
+    if (text ==='') return this.props.editItem(this.props.todolist, true);
       e.target.value = '';
       const task = {id: this.props.todolist.id, title: text, completed: this.props.todolist.completed};
-      this.props.EditItem(task);
+      this.props.editItem(task);
       this.setState({
         IdEdit: 0,
       })
     }
 
 handleInputChange = (e) => {
-   this.setState({ValueBeforeEdit: e.target.value});
+   this.setState({valueBeforeEdit: e.target.value});
 }
 
 render() {
-  const {IdEdit, ValueBeforeEdit} = this.state;
-  const {todolist, DeleteItem} = this.props;
+  const {idEdit, valueBeforeEdit} = this.state;
+  const {todolist, deleteItem} = this.props;
   const completed = todolist.completed;
   const check = <input type="checkbox" id={todolist.id} checked={completed} className="list-checkbox" onChange={this.handleClickCheckbox}/>
-  const isEdit = (todolist.id === IdEdit);
+  const isEdit = (todolist.id === idEdit);
 
       return (
         <div className="listItemWrapper">
           {!isEdit && check}
           {!isEdit && <label htmlFor={todolist.id}></label>}
-          {!isEdit && <Title todolist={todolist} EditItem={this.handleEditItem}/>}
-          {!isEdit && <BtnDelete onClickDelete={DeleteItem} id={todolist.id}/>}
-          {isEdit && <input type="text" autoFocus className="text-editing" value={ValueBeforeEdit} onChange={this.handleInputChange} onKeyDown={this.handleKeyPress} onBlur={this.handleInputBlur}/>}
+          {!isEdit && <Title todolist={todolist} editItem={this.handleEditItem}/>}
+          {!isEdit && <BtnDelete onClickDelete={deleteItem} id={todolist.id}/>}
+          {isEdit && <input type="text" autoFocus className="text-editing" value={valueBeforeEdit} onChange={this.handleInputChange} onKeyDown={this.handleKeyPress} onBlur={this.handleInputBlur}/>}
         </div>   
       )
   }

@@ -15,7 +15,7 @@ class ListFooter extends Component{
 
   handleClickTab = (e) => {
     const tab = e.target.innerHTML;
-    this.props.getItemsTab(tab);
+    this.props.getTab(tab);
     this.setState({
       tab: tab
     })
@@ -23,19 +23,19 @@ class ListFooter extends Component{
 
   render() {
     const {tab} = this.state;
-    const {DeleteCompletedAll, countActiveItem} = this.props;
-    const BorderAll = (tab === 'All') ? 'activeBord' : ''
-    const BorderActive = (tab === 'Active') ? 'activeBord' : ''
-    const BorderCompleted = (tab === 'Completed') ? 'activeBord' : ''
+    const {deleteCompletedAll, countActiveItem} = this.props;
+    const borderAll = (tab === 'All') ? 'activeBord' : ''
+    const borderActive = (tab === 'Active') ? 'activeBord' : ''
+    const borderCompleted = (tab === 'Completed') ? 'activeBord' : ''
     return (
           <li className="list-footer js-list-footer">
             <span className="footer-item item-select active-task">{countActiveItem === 1 ? `${countActiveItem} item left` : `${countActiveItem} items left`}</span>
             <div className="bookmarks-wrapper">
-              <span className={`footer-item bookmarks ${BorderAll}`} onClick={this.handleClickTab}>All</span>
-              <span className={`footer-item bookmarks ${BorderActive}`} onClick={this.handleClickTab}>Active</span>
-              <span className={`footer-item bookmarks ${BorderCompleted}`} onClick={this.handleClickTab}>Completed</span>
+              <span className={`footer-item bookmarks ${borderAll}`} onClick={this.handleClickTab}>All</span>
+              <span className={`footer-item bookmarks ${borderActive}`} onClick={this.handleClickTab}>Active</span>
+              <span className={`footer-item bookmarks ${borderCompleted}`} onClick={this.handleClickTab}>Completed</span>
             </div>
-            {this.props.isCheckedExists && <span className="footer-item delete-completed" onClick={DeleteCompletedAll}>Clear completed</span>}
+            {this.props.isCheckedExists && <span className="footer-item delete-completed" onClick={deleteCompletedAll}>Clear completed</span>}
         </li>
       )
   }

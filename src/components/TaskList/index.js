@@ -8,7 +8,6 @@ class TaskList extends Component {
     super(props)
 
     this.state = {
-      isOpen: false,
       tab: 'All'
     }
   }
@@ -40,10 +39,10 @@ class TaskList extends Component {
       <li key={item.id} className="list-item">
         <ItemTaskList 
           todolist={item}
-          DeleteItem={this.props.DeleteItem}
-          CheckedItem={this.props.CheckedItem}
-          EditItem={this.props.EditItem}
-          IdEdit={this.props.IdEdit}
+          idEdit={this.props.idEdit}
+          deleteItem={this.props.deleteItem}
+          checkedItem={this.props.checkedItem}
+          editItem={this.props.editItem}
         />
       </li>
       )
@@ -53,10 +52,10 @@ class TaskList extends Component {
         <ul className="main__task-list">
           {listItem}
           <ListFooter 
-            DeleteCompletedAll={this.props.DeleteCompletedAll}
-            countActiveItem={this.props.countActiveItem}
-            getItemsTab={this.handleGetItemsTab}
             isCheckedExists={this.props.isCheckedExists}
+            countActiveItem={this.props.countActiveItem}
+            deleteCompletedAll={this.props.deleteCompletedAll}
+            getTab={this.handleGetItemsTab}
           />
         </ul>
       )

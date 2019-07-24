@@ -15,7 +15,7 @@ class Main extends Component {
     }
 
     this.getTextFromTextarea = this.getTextFromTextarea.bind(this);
-    this.handleDeleteItem = this.handleDeleteItem.bind(this);
+    this.handleItemDelete = this.handleItemDelete.bind(this);
     this.handleDeleteCompleted = this.handleDeleteCompleted.bind(this);
     this.handleCheckedItem = this.handleCheckedItem.bind(this);
     this.handleSelectedItem = this.handleSelectedItem.bind(this);
@@ -40,7 +40,7 @@ class Main extends Component {
     }
   }
 
-  handleDeleteItem = (ItemID) => {
+  handleItemDelete = (ItemID) => {
     const {todoList, isOpen} = this.state;
     for (let i = 0; i < todoList.length; i++) {
       if (todoList[i].id === ItemID) {
@@ -112,7 +112,7 @@ class Main extends Component {
 
   handleEditItem = (todolistEdit, isEmpty) => {
     const {todoList} = this.state;
-    if (isEmpty) return this.handleDeleteItem(todolistEdit.id)
+    if (isEmpty) return this.handleItemDelete(todolistEdit.id)
     for (let i = 0; i < todoList.length; i++) {
       if (todoList[i].id === todolistEdit.id) {
         todoList[i].title = todolistEdit.title;
@@ -130,18 +130,18 @@ class Main extends Component {
     const countCompletedItems = (this.state.todoList.filter(itemList => itemList.completed)).length;
     const Tasks = isOpen && <TaskList 
         todoList={todoList}
-        DeleteItem={this.handleDeleteItem}
-        CheckedItem={this.handleCheckedItem}
-        DeleteCompletedAll={this.handleDeleteCompleted}
         countActiveItem={countActiveItem}
-        EditItem={this.handleEditItem}
         isCheckedExists={countCompletedItems !== 0}
+        deleteItem={this.handleItemDelete}
+        checkedItem={this.handleCheckedItem}
+        deleteCompletedAll={this.handleDeleteCompleted}
+        editItem={this.handleEditItem}
       />
 
     return (
         <div className="main">
           <div className="main__header">
-            {this.state.isOpen && <BtnSelectAll SelectedItem={this.handleSelectedItem} isAllChecked={countActiveItem === 0}/>}
+            {this.state.isOpen && <BtnSelectAll selectedItem={this.handleSelectedItem} isAllChecked={countActiveItem === 0}/>}
             <Textarea 
               getText = {this.getTextFromTextarea}
             />
