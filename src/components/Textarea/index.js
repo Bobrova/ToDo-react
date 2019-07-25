@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import './style.css'
 
 class Textarea extends Component {
@@ -28,6 +29,10 @@ class Textarea extends Component {
     )
   }
   
+}
+
+Textarea.propTypes = {
+  getText: PropTypes.func
 }
 
 export default Textarea;

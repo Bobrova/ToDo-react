@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import './style.css'
 
 class ListFooter extends Component{
@@ -17,7 +18,7 @@ class ListFooter extends Component{
 
   render() {
     const {tab} = this.state;
-    const {deleteCompletedAll, countActiveItem} = this.props;
+    const {deleteCompletedAll, countActiveItem, isCheckedExists} = this.props;
     const borderAll = (tab === 'All') ? 'activeBord' : ''
     const borderActive = (tab === 'Active') ? 'activeBord' : ''
     const borderCompleted = (tab === 'Completed') ? 'activeBord' : ''
@@ -29,11 +30,16 @@ class ListFooter extends Component{
               <span className={`footer-item bookmarks ${borderActive}`} onClick={this.handleClickTab}>Active</span>
               <span className={`footer-item bookmarks ${borderCompleted}`} onClick={this.handleClickTab}>Completed</span>
             </div>
-            {this.props.isCheckedExists && <span className="footer-item delete-completed" onClick={deleteCompletedAll}>Clear completed</span>}
+            {isCheckedExists && <span className="footer-item delete-completed" onClick={deleteCompletedAll}>Clear completed</span>}
         </li>
       )
-  }
-  
+  }  
+}
+
+ListFooter.propTypes = {
+  deleteCompletedAll: PropTypes.func,
+  countActiveItem: PropTypes.number,
+  isCheckedExists: PropTypes.bool
 }
 
 export default ListFooter;

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Title from '../Title'
 import BtnDelete from '../BtnDelete'
+import PropTypes from 'prop-types';
 import './style.css'
 
 class ItemTaskList extends Component {
@@ -96,4 +97,11 @@ class ItemTaskList extends Component {
   }
 }
 
-  export default ItemTaskList;
+ItemTaskList.propTypes = {
+  todolist: PropTypes.object,
+  deleteItem: PropTypes.func,
+  editItem: PropTypes.func,
+  checkedItem: PropTypes.func
+}
+
+export default ItemTaskList;

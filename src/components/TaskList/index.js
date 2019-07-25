@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ItemTaskList from '../ItemTaskList'
 import ListFooter from '../ListFooter'
+import PropTypes from 'prop-types';
 import './style.css'
 
 class TaskList extends Component {
@@ -19,7 +20,6 @@ class TaskList extends Component {
     const {tab} = this.state
     const {
       todoList,
-      idEdit,
       deleteItem,
       checkedItem,
       editItem,
@@ -46,7 +46,6 @@ class TaskList extends Component {
       <li key={item.id} className="list-item">
         <ItemTaskList 
           todolist={item}
-          idEdit={idEdit}
           deleteItem={deleteItem}
           checkedItem={checkedItem}
           editItem={editItem}
@@ -66,6 +65,16 @@ class TaskList extends Component {
         </ul>
       )
   }
+}
+
+TaskList.propTypes = {
+  todoList: PropTypes.array,
+  isCheckedExists: PropTypes.bool,
+  countActiveItem: PropTypes.number,
+  deleteItem: PropTypes.func,
+  checkedItem: PropTypes.func,
+  editItem: PropTypes.func,
+  deleteCompletedAll: PropTypes.func
 }
 
 export default TaskList;
