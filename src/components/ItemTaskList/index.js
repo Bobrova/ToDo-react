@@ -63,19 +63,37 @@ class ItemTaskList extends Component {
     const {idEdit, valueBeforeEdit} = this.state;
     const {todolist, deleteItem} = this.props;
     const completed = todolist.completed;
-    const check = <input type="checkbox" id={todolist.id} checked={completed} className="list-checkbox" onChange={this.handleClickCheckbox}/>
     const isEdit = (todolist.id === idEdit);
 
-        return (
+    return (
+      <React.Fragment>
+        {isEdit ? (
+          <input
+            type="text"
+            autoFocus
+            className="text-editing"
+            value={valueBeforeEdit}
+            onChange={this.handleInputChange}
+            onKeyDown={this.handleKeyPress}
+            onBlur={this.handleInputBlur}
+          />
+        ) : (
           <div className="listItemWrapper">
-            {!isEdit && check}
-            {!isEdit && <label htmlFor={todolist.id}></label>}
-            {!isEdit && <Title todolist={todolist} editItem={this.handleEditItem}/>}
-            {!isEdit && <BtnDelete onClickDelete={deleteItem} id={todolist.id}/>}
-            {isEdit && <input type="text" autoFocus className="text-editing" value={valueBeforeEdit} onChange={this.handleInputChange} onKeyDown={this.handleKeyPress} onBlur={this.handleInputBlur}/>}
-          </div>   
-        )
-    }
+            <input
+              type="checkbox"
+              id={todolist.id}
+              checked={completed}
+              className="list-checkbox"
+              onChange={this.handleClickCheckbox}
+            />
+            <label htmlFor={todolist.id}></label>
+            <Title todolist={todolist} editItem={this.handleEditItem} />
+            <BtnDelete onClickDelete={deleteItem} id={todolist.id} />
+          </div>
+        )}
+      </React.Fragment>
+    );
   }
+}
 
   export default ItemTaskList;
