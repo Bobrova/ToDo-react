@@ -1,22 +1,23 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './style.css'
+import './style.css';
 
 class BtnDelete extends Component {
+  handleClickBtn = () => {
+    const { onClickDelete, id } = this.props;
+    onClickDelete(id);
+  }
 
   render() {
     return (
         <div className="btnDel" onClick={this.handleClickBtn}></div>
-    )
+    );
   }
-  
-  handleClickBtn = () => {
-      this.props.onClickDelete(this.props.id);
-    }
 }
 
 BtnDelete.propTypes = {
-  id: PropTypes.number
-}
+  id: PropTypes.number.isRequired,
+  onClickDelete: PropTypes.func.isRequired,
+};
 
-export default BtnDelete
+export default BtnDelete;

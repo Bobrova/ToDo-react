@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './style.css'
+import './style.css';
 
 class Textarea extends Component {
-  
   handleKeyPress = (e) => {
-    const {getText} = this.props;
+    const { getText } = this.props;
     const ENTER_KEY_CODE = 13;
     const text = e.target.value;
     if (e.keyCode === ENTER_KEY_CODE) {
@@ -14,7 +13,6 @@ class Textarea extends Component {
         e.target.value = '';
         getText(text);
       }
-      
     }
   }
 
@@ -26,13 +24,12 @@ class Textarea extends Component {
           placeholder="What needs to be done?" 
           onKeyDown={this.handleKeyPress}>
         </textarea>
-    )
+    );
   }
-  
 }
 
 Textarea.propTypes = {
-  getText: PropTypes.func
-}
+  getText: PropTypes.func.isRequired,
+};
 
 export default Textarea;

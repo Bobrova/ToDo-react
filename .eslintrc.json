@@ -5,11 +5,17 @@
         "react",
         "jsx-a11y"
     ],
+    
     "env": {
       "browser": true
     },
+
     "parserOptions": {
     "ecmaVersion": 6
     },
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+
+    "rules": {
+      
+    }
 }

@@ -1,23 +1,22 @@
-import React, {Component} from 'react';
-import ItemTaskList from '../ItemTaskList'
-import ListFooter from '../ListFooter'
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './style.css'
+import ItemTaskList from '../ItemTaskList';
+import ListFooter from '../ListFooter';
+import './style.css';
 
 class TaskList extends Component {
-
   state = {
-    tab: 'All'
+    tab: 'All',
   }
 
   handleGetItemsTab = (tab) => {
     this.setState({
-          tab: tab
-        });
+      tab,
+    });
   }
 
   render() {
-    const {tab} = this.state
+    const { tab } = this.state;
     const {
       todoList,
       deleteItem,
@@ -25,56 +24,60 @@ class TaskList extends Component {
       editItem,
       isCheckedExists,
       countActiveItem,
-      deleteCompletedAll
-    } = this.props
+      deleteCompletedAll,
+    } = this.props;
 
     this.getItemsTab = () => {
-    switch (tab) {
-      case 'All':  
-        return todoList
-      case 'Active':  
-        return todoList.filter(itemList => !itemList.completed)
-      case 'Completed':  
-        return todoList.filter(itemList => itemList.completed)
-      default: 
-        break
-    }
-  }
+      switch (tab) {
+        case 'All':
+          return todoList;
+        case 'Active':
+          return todoList.filter(itemList => !itemList.completed);
+        case 'Completed':
+          return todoList.filter(itemList => itemList.completed);
+        default:
+          break;
+      }
+    };
 
-    const todoListTab = this.getItemsTab()
-    const listItem = todoListTab.map(item => 
+    const todoListTab = this.getItemsTab();
+    const listItem = todoListTab.map(item =>
       <li key={item.id} className="list-item">
-        <ItemTaskList 
+        <ItemTaskList
           todolist={item}
           deleteItem={deleteItem}
           checkedItem={checkedItem}
           editItem={editItem}
         />
       </li>
-      )
+    );
 
-      return (
-        <ul className="main__task-list">
-          {listItem}
-          <ListFooter 
-            isCheckedExists={isCheckedExists}
-            countActiveItem={countActiveItem}
-            deleteCompletedAll={deleteCompletedAll}
-            getTab={this.handleGetItemsTab}
-          />
-        </ul>
-      )
+    return (
+      <ul className="main__task-list">
+        {listItem}
+        <ListFooter
+          isCheckedExists={isCheckedExists}
+          countActiveItem={countActiveItem}
+          deleteCompletedAll={deleteCompletedAll}
+          getTab={this.handleGetItemsTab}
+        />
+      </ul>
+    );
   }
 }
 
 TaskList.propTypes = {
-  todoList: PropTypes.array,
-  isCheckedExists: PropTypes.bool,
-  countActiveItem: PropTypes.number,
-  deleteItem: PropTypes.func,
-  checkedItem: PropTypes.func,
-  editItem: PropTypes.func,
-  deleteCompletedAll: PropTypes.func
+  todoList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    completed: PropTypes.bool,
+  })).isRequired,
+  isCheckedExists: PropTypes.bool.isRequired,
+  countActiveItem: PropTypes.number.isRequired,
+  deleteItem: PropTypes.func.isRequired,
+  checkedItem: PropTypes.func.isRequired,
+  editItem: PropTypes.func.isRequired,
+  deleteCompletedAll: PropTypes.func.isRequired,
 }
 
 export default TaskList;

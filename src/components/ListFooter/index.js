@@ -1,27 +1,27 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './style.css'
+import './style.css';
 
-class ListFooter extends Component{
-
+class ListFooter extends Component {
   state = {
-    tab: 'All'
+    tab: 'All',
   }
 
   handleClickTab = (e) => {
+    const { getTab } = this.props;
     const tab = e.target.innerHTML;
-    this.props.getTab(tab);
+    getTab(tab);
     this.setState({
-      tab: tab
-    })
+      tab,
+    });
   }
 
   render() {
-    const {tab} = this.state;
-    const {deleteCompletedAll, countActiveItem, isCheckedExists} = this.props;
-    const borderAll = (tab === 'All') ? 'activeBord' : ''
-    const borderActive = (tab === 'Active') ? 'activeBord' : ''
-    const borderCompleted = (tab === 'Completed') ? 'activeBord' : ''
+    const { tab } = this.state;
+    const { deleteCompletedAll, countActiveItem, isCheckedExists } = this.props;
+    const borderAll = (tab === 'All') ? 'activeBord' : '';
+    const borderActive = (tab === 'Active') ? 'activeBord' : '';
+    const borderCompleted = (tab === 'Completed') ? 'activeBord' : '';
     return (
           <li className="list-footer js-list-footer">
             <span className="footer-item item-select active-task">{countActiveItem === 1 ? `${countActiveItem} item left` : `${countActiveItem} items left`}</span>
@@ -37,9 +37,10 @@ class ListFooter extends Component{
 }
 
 ListFooter.propTypes = {
-  deleteCompletedAll: PropTypes.func,
-  countActiveItem: PropTypes.number,
-  isCheckedExists: PropTypes.bool
-}
+  deleteCompletedAll: PropTypes.func.isRequired,
+  countActiveItem: PropTypes.number.isRequired,
+  isCheckedExists: PropTypes.bool.isRequired,
+  getTab: PropTypes.func.isRequired,
+};
 
 export default ListFooter;

@@ -1,69 +1,69 @@
-import React, {Component} from 'react';
-import Title from '../Title'
-import BtnDelete from '../BtnDelete'
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './style.css'
+import Title from '../Title';
+import BtnDelete from '../BtnDelete';
+import './style.css';
 
 class ItemTaskList extends Component {
-
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       idEdit: 0,
-      valueBeforeEdit: ''
-    }
+      valueBeforeEdit: '',
+    };
   }
 
   handleEditItem = (todolist) => {
     this.setState({
       idEdit: todolist.id,
-      valueBeforeEdit: todolist.title
-    })
+      valueBeforeEdit: todolist.title,
+    });
   }
 
   handleClickCheckbox = () => {
-    this.props.checkedItem(this.props.todolist.id)
+    const { checkedItem, todolist } = this.props;
+    checkedItem(todolist.id);
   }
 
   handleKeyPress = (e) => {
-    const {todolist, editItem} = this.props;
+    const { todolist, editItem } = this.props;
     const ENTER_KEY_CODE = 13;
     if (e.keyCode === ENTER_KEY_CODE) {
       e.preventDefault();
       const text = e.target.value.trim();
-      if (text ==='') return editItem(todolist, true);
+      if (text === '') return editItem(todolist, true);
       if (text !== '' && /\S/.test(text)) {
         e.target.value = '';
-        const task = {id: todolist.id, title: text, completed: todolist.completed};
+        const task = { id: todolist.id, title: text, completed: todolist.completed };
         editItem(task);
         this.setState({
           idEdit: 0,
-        })
-      } 
+        });
+      }
     }
   }
 
   handleInputBlur = (e) => {
-    const {todolist, editItem} = this.props;
+    const { todolist, editItem } = this.props;
     const text = e.target.value.trim();
-    if (text ==='') return editItem(todolist, true);
+    if (text === '') return editItem(todolist, true);
     e.target.value = '';
-    const task = {id: todolist.id, title: text, completed: todolist.completed};
+    const task = { id: todolist.id, title: text, completed: todolist.completed };
     editItem(task);
     this.setState({
       idEdit: 0,
-    })
+    });
   }
 
   handleInputChange = (e) => {
-     this.setState({valueBeforeEdit: e.target.value});
+    this.setState({ valueBeforeEdit: e.target.value });
   }
 
   render() {
-    const {idEdit, valueBeforeEdit} = this.state;
-    const {todolist, deleteItem} = this.props;
-    const completed = todolist.completed;
+    const { idEdit, valueBeforeEdit } = this.state;
+    const { todolist, deleteItem } = this.props;
+    const { completed } = todolist;
     const isEdit = (todolist.id === idEdit);
 
     return (
@@ -98,10 +98,14 @@ class ItemTaskList extends Component {
 }
 
 ItemTaskList.propTypes = {
-  todolist: PropTypes.object,
-  deleteItem: PropTypes.func,
-  editItem: PropTypes.func,
-  checkedItem: PropTypes.func
-}
+  todolist: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    completed: PropTypes.bool,
+  }).isRequired,
+  deleteItem: PropTypes.func.isRequired,
+  editItem: PropTypes.func.isRequired,
+  checkedItem: PropTypes.func.isRequired,
+};
 
 export default ItemTaskList;
